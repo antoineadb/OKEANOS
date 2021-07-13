@@ -1,0 +1,59 @@
+App\Entity\Subscription:
+    type: entity
+    table: subscription
+    indexes:
+        fk_saison_id:
+            columns:
+                - fk_saison_id
+        fk_subscription_type_id:
+            columns:
+                - fk_subscription_type_id
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        label:
+            type: string
+            nullable: false
+            length: 512
+            options:
+                fixed: false
+        price:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+        createdon:
+            type: datetime
+            nullable: true
+            options:
+                default: sysdate()
+            column: createdOn
+    manyToOne:
+        fkSaison:
+            targetEntity: Saison
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                fk_saison_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        fkSubscriptionType:
+            targetEntity: SubscriptionType
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                fk_subscription_type_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

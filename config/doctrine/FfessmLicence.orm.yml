@@ -1,0 +1,37 @@
+App\Entity\FfessmLicence:
+    type: entity
+    table: ffessm_licence
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        fkSaisonId:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            column: fk_saison_id
+        label:
+            type: string
+            nullable: false
+            length: 512
+            options:
+                fixed: false
+        price:
+            type: float
+            nullable: false
+            precision: 10
+            scale: 0
+        createdon:
+            type: datetime
+            nullable: true
+            options:
+                default: sysdate()
+            column: createdOn
+    lifecycleCallbacks: {  }

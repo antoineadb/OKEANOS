@@ -1,0 +1,46 @@
+App\Entity\Account:
+    type: entity
+    table: account
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        mail:
+            type: string
+            nullable: true
+            length: 512
+            options:
+                fixed: false
+                default: 'NULL'
+        salt:
+            type: string
+            nullable: true
+            length: 512
+            options:
+                fixed: false
+                default: 'NULL'
+        password:
+            type: string
+            nullable: true
+            length: 512
+            options:
+                fixed: false
+                default: 'NULL'
+        admin:
+            type: boolean
+            nullable: true
+            options:
+                default: '0'
+        createdon:
+            type: datetime
+            nullable: false
+            options:
+                default: current_timestamp()
+            column: createdOn
+    lifecycleCallbacks: {  }

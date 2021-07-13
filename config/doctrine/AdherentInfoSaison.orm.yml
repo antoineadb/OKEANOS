@@ -1,0 +1,227 @@
+App\Entity\AdherentInfoSaison:
+    type: entity
+    table: adherent_info_saison
+    indexes:
+        fk_insurance_id:
+            columns:
+                - fk_insurance_id
+        fk_team_id:
+            columns:
+                - fk_team_id
+        fk_certificate_licence_id:
+            columns:
+                - fk_certificate_licence_id
+        fk_ffessm_licence_id:
+            columns:
+                - fk_ffessm_licence_id
+        fk_actual_training_id:
+            columns:
+                - fk_actual_training_id
+        fk_sick_note_id:
+            columns:
+                - fk_sick_note_id
+        fk_account_id:
+            columns:
+                - fk_account_id
+        fk_subscription_id:
+            columns:
+                - fk_subscription_id
+        fk_training_id:
+            columns:
+                - fk_training_id
+        fk_parental_agreement_id:
+            columns:
+                - fk_parental_agreement_id
+        fk_saison_id:
+            columns:
+                - fk_saison_id
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        pictureAuthorisation:
+            type: boolean
+            nullable: true
+            options:
+                default: '0'
+            column: picture_authorisation
+        neadCertificate:
+            type: boolean
+            nullable: true
+            options:
+                default: '0'
+            column: nead_certificate
+        validationStart:
+            type: boolean
+            nullable: true
+            options:
+                default: '0'
+            column: validation_start
+        validationGeneralInformations:
+            type: boolean
+            nullable: true
+            options:
+                default: '0'
+            column: validation_general_informations
+        validationLicence:
+            type: boolean
+            nullable: true
+            options:
+                default: '0'
+            column: validation_licence
+        validationSickNote:
+            type: boolean
+            nullable: true
+            options:
+                default: '0'
+            column: validation_sick_note
+        validationParentalAgreement:
+            type: boolean
+            nullable: true
+            options:
+                default: '0'
+            column: validation_parental_agreement
+        validationPaymentTransmitted:
+            type: boolean
+            nullable: true
+            options:
+                default: '0'
+            column: validation_payment_transmitted
+        validationPaymentCashed:
+            type: boolean
+            nullable: true
+            options:
+                default: '0'
+            column: validation_payment_cashed
+        validationComment:
+            type: string
+            nullable: true
+            length: 1024
+            options:
+                fixed: false
+                default: 'NULL'
+            column: validation_comment
+        createdon:
+            type: datetime
+            nullable: true
+            options:
+                default: sysdate()
+            column: createdOn
+    manyToOne:
+        fkAccount:
+            targetEntity: Account
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                fk_account_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        fkParentalAgreement:
+            targetEntity: AdherentDocument
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                fk_parental_agreement_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        fkCertificateLicence:
+            targetEntity: AdherentDocument
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                fk_certificate_licence_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        fkSaison:
+            targetEntity: Saison
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                fk_saison_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        fkFfessmLicence:
+            targetEntity: FfessmLicence
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                fk_ffessm_licence_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        fkSubscription:
+            targetEntity: Subscription
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                fk_subscription_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        fkInsurance:
+            targetEntity: Insurance
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                fk_insurance_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        fkActualTraining:
+            targetEntity: DivingTraining
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                fk_actual_training_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        fkTraining:
+            targetEntity: DivingTraining
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                fk_training_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        fkTeam:
+            targetEntity: HockeyTeam
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                fk_team_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        fkSickNote:
+            targetEntity: AdherentDocument
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                fk_sick_note_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

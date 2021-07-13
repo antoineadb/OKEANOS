@@ -1,0 +1,48 @@
+App\Entity\RequireInsurance:
+    type: entity
+    table: require_insurance
+    indexes:
+        fk_subscription_id:
+            columns:
+                - fk_subscription_id
+        fk_insurance_id:
+            columns:
+                - fk_insurance_id
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        createdon:
+            type: datetime
+            nullable: true
+            options:
+                default: sysdate()
+            column: createdOn
+    manyToOne:
+        fkSubscription:
+            targetEntity: Subscription
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                fk_subscription_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        fkInsurance:
+            targetEntity: Insurance
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                fk_insurance_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

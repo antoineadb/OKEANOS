@@ -1,0 +1,43 @@
+App\Entity\AdherentDocument:
+    type: entity
+    table: adherent_document
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        fileType:
+            type: string
+            nullable: true
+            length: 512
+            options:
+                fixed: false
+                default: 'NULL'
+            column: file_type
+        contentDisposition:
+            type: string
+            nullable: true
+            length: 512
+            options:
+                fixed: false
+                default: 'NULL'
+            column: content_disposition
+        data:
+            type: blob
+            nullable: true
+            length: 0
+            options:
+                fixed: false
+                default: 'NULL'
+        createdon:
+            type: datetime
+            nullable: true
+            options:
+                default: sysdate()
+            column: createdOn
+    lifecycleCallbacks: {  }

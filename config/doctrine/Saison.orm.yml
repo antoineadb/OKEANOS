@@ -1,0 +1,39 @@
+App\Entity\Saison:
+    type: entity
+    table: saison
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        label:
+            type: string
+            nullable: true
+            length: 512
+            options:
+                fixed: false
+                default: 'NULL'
+        startDate:
+            type: date
+            nullable: true
+            options:
+                default: 'NULL'
+            column: start_date
+        endDate:
+            type: date
+            nullable: true
+            options:
+                default: 'NULL'
+            column: end_date
+        createdon:
+            type: datetime
+            nullable: true
+            options:
+                default: sysdate()
+            column: createdOn
+    lifecycleCallbacks: {  }

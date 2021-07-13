@@ -1,0 +1,139 @@
+App\Entity\AdherentInfo:
+    type: entity
+    table: adherent_info
+    indexes:
+        fk_account_id:
+            columns:
+                - fk_account_id
+        fk_photo_id:
+            columns:
+                - fk_photo_id
+    id:
+        id:
+            type: bigint
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        firstname:
+            type: string
+            nullable: false
+            length: 512
+            options:
+                fixed: false
+        lastname:
+            type: string
+            nullable: false
+            length: 512
+            options:
+                fixed: false
+        birsthday:
+            type: date
+            nullable: false
+        birthplace:
+            type: string
+            nullable: true
+            length: 512
+            options:
+                fixed: false
+                default: 'NULL'
+        licenceNumber:
+            type: string
+            nullable: true
+            length: 512
+            options:
+                fixed: false
+                default: 'NULL'
+            column: licence_number
+        adresse:
+            type: string
+            nullable: true
+            length: 512
+            options:
+                fixed: false
+                default: 'NULL'
+        zipCode:
+            type: string
+            nullable: true
+            length: 512
+            options:
+                fixed: false
+                default: 'NULL'
+            column: zip_code
+        city:
+            type: string
+            nullable: true
+            length: 512
+            options:
+                fixed: false
+                default: 'NULL'
+        job:
+            type: string
+            nullable: true
+            length: 512
+            options:
+                fixed: false
+                default: 'NULL'
+        telNumber:
+            type: string
+            nullable: true
+            length: 15
+            options:
+                fixed: false
+                default: 'NULL'
+            column: tel_number
+        mobileNumber:
+            type: string
+            nullable: true
+            length: 15
+            options:
+                fixed: false
+                default: 'NULL'
+            column: mobile_number
+        emergencyContact:
+            type: string
+            nullable: true
+            length: 512
+            options:
+                fixed: false
+                default: 'NULL'
+            column: emergency_contact
+        emergencyTelNumber:
+            type: string
+            nullable: true
+            length: 15
+            options:
+                fixed: false
+                default: 'NULL'
+            column: emergency_tel_number
+        createdon:
+            type: datetime
+            nullable: true
+            options:
+                default: sysdate()
+            column: createdOn
+    manyToOne:
+        fkAccount:
+            targetEntity: Account
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                fk_account_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        fkPhoto:
+            targetEntity: AdherentDocument
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                fk_photo_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
