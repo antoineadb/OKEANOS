@@ -5,6 +5,7 @@ Procédure d'installation de l'application
 
 git clone https://github.com/antoineadb/okeanos.git
 puis composer install pour télécharger le dossier vendor
+
 renseigner le fichier .env avec les infos de la BD
 
 les apis sont disponible sous l'url
