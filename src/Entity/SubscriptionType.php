@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use ApiPlatform\Core\Annotation\ApiResource;
 /**
  * SubscriptionType
  *
  * @ORM\Table(name="subscription_type")
  * @ORM\Entity
+ * @ApiResource
  */
 class SubscriptionType
 {

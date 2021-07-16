@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * Insurance
  *
  * @ORM\Table(name="insurance", indexes={@ORM\Index(name="fk_saison_id", columns={"fk_saison_id"})})
  * @ORM\Entity
+ * @ApiResource
  */
 class Insurance
 {

@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * AdherentInfo
  *
  * @ORM\Table(name="adherent_info", indexes={@ORM\Index(name="fk_photo_id", columns={"fk_photo_id"}), @ORM\Index(name="fk_account_id", columns={"fk_account_id"})})
  * @ORM\Entity
+ * @ApiResource
  */
 class AdherentInfo
 {

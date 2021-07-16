@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * Subscription
  *
  * @ORM\Table(name="subscription", indexes={@ORM\Index(name="fk_saison_id", columns={"fk_saison_id"}), @ORM\Index(name="fk_subscription_type_id", columns={"fk_subscription_type_id"})})
  * @ORM\Entity
+ * @ApiResource
  */
 class Subscription
 {

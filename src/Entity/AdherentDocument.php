@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * AdherentDocument
  *
  * @ORM\Table(name="adherent_document")
  * @ORM\Entity
+ * @ApiResource
  */
 class AdherentDocument
 {

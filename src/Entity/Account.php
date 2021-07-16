@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Entity;
-
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * Account
  *
  * @ORM\Table(name="account")
  * @ORM\Entity
+ * @ApiResource
  */
 class Account
 {

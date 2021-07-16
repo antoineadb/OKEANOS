@@ -3,12 +3,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * FfessmLicence
  *
  * @ORM\Table(name="ffessm_licence")
  * @ORM\Entity
+ * @ApiResource
  */
 class FfessmLicence
 {
@@ -23,28 +27,32 @@ class FfessmLicence
 
     /**
      * @var int
-     *
+     * @Assert\NotBlank(message="L'id de la saison est obligatoire")
      * @ORM\Column(name="fk_saison_id", type="bigint", nullable=false)
+     *
+     * @Groups("licence")
      */
     private $fkSaisonId;
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank(message="le label est obligatoire")
      * @ORM\Column(name="label", type="string", length=512, nullable=false)
+     *  @Groups("licence")
      */
     private $label;
 
     /**
      * @var float
-     *
+     * @Assert\NotBlank(message="le prix est obligatoire")
      * @ORM\Column(name="price", type="float", precision=10, scale=0, nullable=false)
+     *  @Groups("licence")
      */
     private $price;
 
     /**
      * @var \DateTime|null
-     *
+     * @Groups("licence")
      * @ORM\Column(name="createdOn", type="datetime", nullable=true, options={"default"="sysdate()"})
      */
     private $createdon = 'sysdate()';

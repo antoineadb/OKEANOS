@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use ApiPlatform\Core\Annotation\ApiResource;
 /**
  * HockeyTeam
  *
  * @ORM\Table(name="hockey_team")
  * @ORM\Entity
+ * @ApiResource
  */
 class HockeyTeam
 {

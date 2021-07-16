@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use ApiPlatform\Core\Annotation\ApiResource;
 /**
  * AdherentInfoSaison
  *
  * @ORM\Table(name="adherent_info_saison", indexes={@ORM\Index(name="fk_ffessm_licence_id", columns={"fk_ffessm_licence_id"}), @ORM\Index(name="fk_actual_training_id", columns={"fk_actual_training_id"}), @ORM\Index(name="fk_sick_note_id", columns={"fk_sick_note_id"}), @ORM\Index(name="fk_account_id", columns={"fk_account_id"}), @ORM\Index(name="fk_subscription_id", columns={"fk_subscription_id"}), @ORM\Index(name="fk_training_id", columns={"fk_training_id"}), @ORM\Index(name="fk_parental_agreement_id", columns={"fk_parental_agreement_id"}), @ORM\Index(name="fk_saison_id", columns={"fk_saison_id"}), @ORM\Index(name="fk_insurance_id", columns={"fk_insurance_id"}), @ORM\Index(name="fk_team_id", columns={"fk_team_id"}), @ORM\Index(name="fk_certificate_licence_id", columns={"fk_certificate_licence_id"})})
  * @ORM\Entity
+ * @ApiResource
  */
 class AdherentInfoSaison
 {
