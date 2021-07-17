@@ -4,6 +4,8 @@ Application de gestion des adhérents du club de plongée et de Hockey sub aquat
 Procédure d'installation de l'application
 
 git clone https://github.com/antoineadb/okeanos.git
+
+télécharger et installer composer https://getcomposer.org/ suivant votre système
 puis composer install pour télécharger le dossier vendor
 
 renseigner le fichier .env avec les infos de la BD (voir avec l'admin du projet)
