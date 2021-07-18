@@ -3,14 +3,18 @@
 namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Account
  *
  * @ORM\Table(name="account")
  * @ORM\Entity
- * @ApiResource
+ * @ApiResource( normalizationContext={"groups"={"read:Account"}},
+ *  collectionOperations={ "get", "post"}
+ *  )
  */
+#  itemOperations={ "get","post", "put", "delete", "patch" })
 class Account
 {
     /**
@@ -19,6 +23,7 @@ class Account
      * @ORM\Column(name="id", type="bigint", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+
      */
     private $id;
 
@@ -26,6 +31,7 @@ class Account
      * @var string|null
      *
      * @ORM\Column(name="mail", type="string", length=512, nullable=true, options={"default"="NULL"})
+     * @Groups("read:Account")
      */
     private $mail = 'NULL';
 
@@ -47,6 +53,7 @@ class Account
      * @var bool|null
      *
      * @ORM\Column(name="admin", type="boolean", nullable=true)
+     * @Groups("read:Account")
      */
     private $admin = '0';
 
