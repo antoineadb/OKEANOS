@@ -62,7 +62,7 @@ class Account
      *
      * @ORM\Column(name="createdOn", type="datetime", nullable=false, options={"default"="current_timestamp()"})
      */
-    private $createdon = 'current_timestamp()';
+    private $createdon;
 
     public function getId(): ?string
     {
@@ -124,7 +124,7 @@ class Account
 
     public function setCreatedon(\DateTimeInterface $createdon): self
     {
-        $this->createdon = $createdon;
+        $this->createdon =$createdon;
 
         return $this;
     }

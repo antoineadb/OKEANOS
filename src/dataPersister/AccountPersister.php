@@ -4,6 +4,7 @@
 namespace App\dataPersister;
 use ApiPlatform\Core\DataPersister\DataPersisterInterface;
 use App\Entity\Account;
+use App\Services\Tools;
 use Doctrine\ORM\EntityManagerInterface;
 
 class AccountPersister implements DataPersisterInterface
@@ -25,6 +26,8 @@ class AccountPersister implements DataPersisterInterface
 
     public function persist($data){
         $data->setCreatedon(new \DateTime());
+        $data->setSalt(Tools::hash(Tools::generateRandomString()));
+        $data->setPassword(Tools::hash($data->getSalt().Tools::hash($data->getMail().$data->getPassword())));
         $this->em->persist($data);
         $this->em->flush();
     }

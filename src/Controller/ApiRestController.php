@@ -2,51 +2,66 @@
 
 namespace App\Controller;
 
-use App\Entity\FfessmLicence;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\AccountRepository;
+use App\Services\Tools;
+use SebastianBergmann\LinesOfCode\IllogicalValuesException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Repository\FfessmLicenceRepository;
 use Symfony\Component\Serializer\Exception\NotEncodableValueException;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Routing\Annotation\Route;
+
 
 class ApiRestController extends AbstractController
 {
     /**
-     * @Route("/apiGetLicenceFFESSM", name="api_get_licence_FFESSM", methods={"GET"})
+     * @Route("/login", name="api_login", methods={"GET"})
      */
-    public function getFFESSMLicence(FfessmLicenceRepository  $repo):JsonResponse
+    public function loginAccount(Request $request, AccountRepository  $repos)
     {
-        return  $this->json($repo->findAll(),200,[],['groups'=>'licence']);
-    }
+        if(!Tools::isJson($request->getContent())){
+            return $this->json([
+                'status' => 401,
+                'message' => 'Le fichier json est invalide'
+            ], 401);
+        }
 
-    /**
-     * @Route("/apiPostLicenceFFESSM", name="api_post_licence_FFESSM", methods={"POST"})
-     */
-    public function postFFESSMLicence(Request $request, SerializerInterface $serializer, EntityManagerInterface $em, ValidatorInterface $validator  )
-    {
-        $jsonReceived = $request->getContent();
         try {
-            $post = $serializer->deserialize($jsonReceived,FfessmLicence::class,'json');
-            $errors = $validator->validate($post);
-            if(count($errors)>0){
-                return $this->json($errors,400);
+            $parsed_json = json_decode($request->getContent());
+            $mail = $parsed_json->{'mail'};
+            $password = $parsed_json->{'password'};
+
+            if ($mail == null || "" == $mail ) {
+                throw new IllogicalValuesException("email is empty");
             }
 
-            $em->persist($post);
-            $em->flush();
-            return $this->json($post,'201',[], ['groups'=>'licence']);
-        }catch (NotEncodableValueException $e){
+            if ($password == null || "" == $password) {
+                throw new IllogicalValuesException("password is empty");
+            }
+
+            $account = $repos->findBy(["mail" => $mail]);
+
+            if ($account == null) {
+                throw new IllogicalValuesException("account doesn't exist");
+            }
+            $hashedPass = Tools::hash($account[0]->getSalt() . Tools::hash($mail.$password));
+                if ($hashedPass !== $account[0]->getPassword()) {
+                    return $this->json([
+                        'status' => 401,
+                        'message' => 'Le mot de passe est invalide'
+                    ], 401);
+
+                } else{
+                    return $this->json([
+                        'status' => 200,
+                        'value' => $account[0],
+                        'login' => 'logged'
+                    ], 200);
+                }
+        } catch (NotEncodableValueException $e) {
             return $this->json([
                 'status' => 400,
                 'message' => $e->getMessage()
             ], 400);
         }
-
     }
 }
