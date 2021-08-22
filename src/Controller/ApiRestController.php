@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\AccountRepository;
 use App\Services\Tools;
+use Doctrine\ORM\EntityManagerInterface;
 use SebastianBergmann\LinesOfCode\IllogicalValuesException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,17 +32,26 @@ class ApiRestController extends AbstractController
             $password = $parsed_json->{'password'};
 
             if ($mail == null || "" == $mail ) {
-                throw new IllogicalValuesException("email is empty");
+                return $this->json([
+                    'status' => 401,
+                    'message' => "L'email n'est pas renseigné"
+                ], 401);
             }
 
             if ($password == null || "" == $password) {
-                throw new IllogicalValuesException("password is empty");
+                return $this->json([
+                    'status' => 401,
+                    'message' => "Le mot de passe n'est pas renseigné"
+                ], 401);
             }
 
             $account = $repos->findBy(["mail" => $mail]);
 
             if ($account == null) {
-                throw new IllogicalValuesException("account doesn't exist");
+                return $this->json([
+                    'status' => 401,
+                    'message' => "Le compte n'existe pas"
+                ], 401);
             }
             $hashedPass = Tools::hash($account[0]->getSalt() . Tools::hash($mail.$password));
                 if ($hashedPass !== $account[0]->getPassword()) {
@@ -63,5 +73,57 @@ class ApiRestController extends AbstractController
                 'message' => $e->getMessage()
             ], 400);
         }
+    }
+
+    /**
+     * @Route("/updatePassword", name="update_password", methods={"PATCH"})
+     */
+    public function updatePassword(Request $request, AccountRepository  $repos, EntityManagerInterface $em)
+    {
+        if (!Tools::isJson($request->getContent())) {
+            return $this->json([
+                'status' => 401,
+                'message' => 'Le fichier json est invalide'
+            ], 401);
+        }
+
+        $parsed_json = json_decode($request->getContent());
+        $mail = $parsed_json->{'mail'};
+        $password = $parsed_json->{'password'};
+
+        if ($password == null || "" == $password) {
+            return $this->json([
+                'status' => 401,
+                'message' => "Le mot de passe n'est pas renseigné"
+            ], 401);
+        }
+
+        if ($mail == null || "" == $mail ) {
+            return $this->json([
+                'status' => 401,
+                'message' => "L'email n'est pas renseigné"
+            ], 401);
+        }
+
+        $salt = Tools::generateSalt();
+
+        $a_account = $repos->findBy(["mail" => $mail]);
+        if ($a_account == null) {
+            return $this->json([
+                'status' => 401,
+                'message' => "Le compte n'existe pas"
+            ], 401);
+        }
+        $account = $a_account[0];
+        $account->setSalt($salt);
+        $account->setPassword(Tools::hash($salt.Tools::hash($mail.$password)));
+
+        $em->persist($account);
+        $em->flush();
+
+        return $this->json([
+            'status' => 200,
+            'message' => "Le mot de passe a été mise à jour"
+        ], 200);
     }
 }

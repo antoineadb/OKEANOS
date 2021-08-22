@@ -26,7 +26,7 @@ class AccountPersister implements DataPersisterInterface
 
     public function persist($data){
         $data->setCreatedon(new \DateTime());
-        $data->setSalt(Tools::hash(Tools::generateRandomString()));
+        $data->setSalt(Tools::generateSalt());
         $data->setPassword(Tools::hash($data->getSalt().Tools::hash($data->getMail().$data->getPassword())));
         $this->em->persist($data);
         $this->em->flush();
