@@ -10,7 +10,10 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *
  * @ORM\Table(name="adherent_info", indexes={@ORM\Index(name="fk_photo_id", columns={"fk_photo_id"}), @ORM\Index(name="fk_account_id", columns={"fk_account_id"})})
  * @ORM\Entity
- * @ApiResource
+ * @ApiResource(
+ *  collectionOperations={ "get", "post"},
+ * attributes={ "input_formats"={"json"={"application/json"}}, "output_formats"={"json"={"application/json"}}}
+ *  )
  */
 class AdherentInfo
 {

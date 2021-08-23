@@ -10,7 +10,10 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *
  * @ORM\Table(name="require_insurance", indexes={@ORM\Index(name="fk_subscription_id", columns={"fk_subscription_id"}), @ORM\Index(name="fk_insurance_id", columns={"fk_insurance_id"})})
  * @ORM\Entity
- * @ApiResource
+ * @ApiResource(
+ *  collectionOperations={ "get", "post"},
+ * attributes={ "input_formats"={"json"={"application/json"}}, "output_formats"={"json"={"application/json"}}}
+ *  )
  */
 class RequireInsurance
 {

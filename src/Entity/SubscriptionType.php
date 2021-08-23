@@ -9,7 +9,10 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *
  * @ORM\Table(name="subscription_type")
  * @ORM\Entity
- * @ApiResource
+ * @ApiResource(
+ *  collectionOperations={ "get", "post"},
+ * attributes={ "input_formats"={"json"={"application/json"}}, "output_formats"={"json"={"application/json"}}}
+ *  )
  */
 class SubscriptionType
 {

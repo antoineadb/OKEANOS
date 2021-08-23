@@ -12,7 +12,7 @@ class AccountPersister implements DataPersisterInterface
     protected $em;
 
     /**
-     * FfessmLicencePersister constructor.
+     * AccountPersister constructor.
      */
     public function __construct(EntityManagerInterface $em)
     {

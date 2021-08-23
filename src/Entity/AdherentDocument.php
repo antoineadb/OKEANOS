@@ -12,7 +12,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Table(name="adherent_document")
  * @ORM\Entity
  * @ApiResource( normalizationContext={"groups"={"read:AdherentDocument"}},
- *  collectionOperations={ "get", "post"}
+ *  collectionOperations={ "get", "post"},
+ * attributes={ "input_formats"={"json"={"application/json"}}, "output_formats"={"json"={"application/json"}}}
  *  )
  */
 class AdherentDocument

@@ -12,7 +12,10 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *
  * @ORM\Table(name="ffessm_licence")
  * @ORM\Entity
- * @ApiResource
+ * @ApiResource(
+ *  collectionOperations={ "get", "post"},
+ * attributes={ "input_formats"={"json"={"application/json"}}, "output_formats"={"json"={"application/json"}}}
+ *  )
  */
 class FfessmLicence
 {

@@ -11,7 +11,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Table(name="account")
  * @ORM\Entity
  * @ApiResource( normalizationContext={"groups"={"read:Account"}},
- *  collectionOperations={ "get", "post"}
+ *  collectionOperations={ "get", "post"},
+ *  attributes={ "input_formats"={"json"={"application/json"}}, "output_formats"={"json"={"application/json"}}}
  *  )
  */
 #  itemOperations={ "get","post", "put", "delete", "patch" })

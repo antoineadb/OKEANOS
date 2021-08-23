@@ -10,7 +10,10 @@ use ApiPlatform\Core\Annotation\ApiResource;
  *
  * @ORM\Table(name="subscription", indexes={@ORM\Index(name="fk_saison_id", columns={"fk_saison_id"}), @ORM\Index(name="fk_subscription_type_id", columns={"fk_subscription_type_id"})})
  * @ORM\Entity
- * @ApiResource
+ * @ApiResource(
+ *  collectionOperations={ "get", "post"},
+ * attributes={ "input_formats"={"json"={"application/json"}}, "output_formats"={"json"={"application/json"}}}
+ *  )
  */
 class Subscription
 {
