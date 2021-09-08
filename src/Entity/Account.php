@@ -51,14 +51,6 @@ class Account
     private $password = 'NULL';
 
     /**
-     * @var bool|null
-     *
-     * @ORM\Column(name="admin", type="boolean", nullable=true)
-     * @Groups("read:Account")
-     */
-    private $admin = '0';
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="createdOn", type="datetime", nullable=false, options={"default"="current_timestamp()"})
@@ -106,17 +98,6 @@ class Account
         return $this;
     }
 
-    public function getAdmin(): ?bool
-    {
-        return $this->admin;
-    }
-
-    public function setAdmin(?bool $admin): self
-    {
-        $this->admin = $admin;
-
-        return $this;
-    }
 
     public function getCreatedon(): ?\DateTimeInterface
     {

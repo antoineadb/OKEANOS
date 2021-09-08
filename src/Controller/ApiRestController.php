@@ -15,10 +15,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class ApiRestController extends AbstractController
 {
     /**
-     * @Route("/login", name="api_login", methods={"GET"})
+     * @Route("/login1", name="api_login", methods={"GET"})
      */
     public function loginAccount(Request $request, AccountRepository  $repos)
     {
+
         if(!Tools::isJson($request->getContent())){
             return $this->json([
                 'status' => 401,
@@ -28,7 +29,7 @@ class ApiRestController extends AbstractController
 
         try {
             $parsed_json = json_decode($request->getContent());
-            $mail = $parsed_json->{'mail'};
+            $mail = $parsed_json->{'username'};
             $password = $parsed_json->{'password'};
 
             if ($mail == null || "" == $mail ) {
